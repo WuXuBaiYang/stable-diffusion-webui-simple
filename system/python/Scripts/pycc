@@ -1,0 +1,3 @@
+#!C:\Users\wuxubaiyang\Desktop\stable-diffusion-webui-simple\system\python\python.exe
+from numba.pycc import main
+main()
