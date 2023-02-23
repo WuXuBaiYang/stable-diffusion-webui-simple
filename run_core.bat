@@ -8,4 +8,4 @@ set PIP_INSTALLER_LOCATION=%DIR%\python\get-pip.py
 set TRANSFORMERS_CACHE=%DIR%\transformers-cache
 set INDEX_URL=https://pypi.mirrors.ustc.edu.cn/simple/
 
-call webui_core.bat %*
+call webui_core.bat --xformers %*

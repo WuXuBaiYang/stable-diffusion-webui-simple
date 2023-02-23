@@ -34,3 +34,5 @@ notification.mp3
 /cache.json
 /system/transformers-cache
 /system/python/Lib
+/system/python/share
+/system/python/Scripts
