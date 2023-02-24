@@ -19,14 +19,13 @@ class ExtraNetworksPageHypernetworks(ui_extra_networks.ExtraNetworksPage):
             preview = None
             for file in previews:
                 if os.path.isfile(file):
-                    preview = self.link_preview(file)
+                    preview = "./file=" + file.replace('\\', '/') + "?mtime=" + str(os.path.getmtime(file))
                     break
 
             yield {
                 "name": name,
                 "filename": path,
                 "preview": preview,
-                "search_term": self.search_terms_from_path(path),
                 "prompt": json.dumps(f"<hypernet:{name}:") + " + opts.extra_networks_default_multiplier + " + json.dumps(">"),
                 "local_preview": path + ".png",
             }

@@ -18,8 +18,7 @@ from modules.textual_inversion.textual_inversion import create_embedding, train_
 from modules.textual_inversion.preprocess import preprocess
 from modules.hypernetworks.hypernetwork import create_hypernetwork, train_hypernetwork
 from PIL import PngImagePlugin,Image
-from modules.sd_models import checkpoints_list
-from modules.sd_models_config import find_checkpoint_config_near_filename
+from modules.sd_models import checkpoints_list, find_checkpoint_config
 from modules.realesrgan_model import get_realesrgan_models
 from modules import devices
 from typing import List
@@ -388,7 +387,7 @@ class Api:
         ]
 
     def get_sd_models(self):
-        return [{"title": x.title, "model_name": x.model_name, "hash": x.shorthash, "sha256": x.sha256, "filename": x.filename, "config": find_checkpoint_config_near_filename(x)} for x in checkpoints_list.values()]
+        return [{"title": x.title, "model_name": x.model_name, "hash": x.shorthash, "sha256": x.sha256, "filename": x.filename, "config": find_checkpoint_config(x)} for x in checkpoints_list.values()]
 
     def get_hypernetworks(self):
         return [{"name": name, "path": shared.hypernetworks[name]} for name in shared.hypernetworks]
@@ -498,7 +497,7 @@ class Api:
             if not apply_optimizations:
                 sd_hijack.undo_optimizations()
             try:
-                hypernetwork, filename = train_hypernetwork(**args)
+                hypernetwork, filename = train_hypernetwork(*args)
             except Exception as e:
                 error = e
             finally:
